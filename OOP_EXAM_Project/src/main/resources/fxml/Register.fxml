@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<!--
+    Register.fxml
+    Customer self-registration screen.
+    After submitting, customer receives a verification code by email.
+-->
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.lims.controller.auth.RegisterController"
+           style="-fx-background-color: #f0f4f8;">
+
+    <VBox alignment="CENTER" spacing="0"
+          maxWidth="420"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 12;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 20, 0, 0, 4);
+                 -fx-padding: 48;">
+
+        <Label text="Create an Account"
+               style="-fx-font-size: 24px;
+                      -fx-font-weight: bold;
+                      -fx-text-fill: #1a73e8;"/>
+
+        <Label text="Patient self-registration"
+               style="-fx-font-size: 11px;
+                      -fx-text-fill: #888;
+                      -fx-padding: 0 0 28 0;"/>
+
+        <Label text="Full Name"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;
+                      -fx-text-fill: #333; -fx-padding: 0 0 4 0;"
+               maxWidth="Infinity"/>
+        <TextField fx:id="nameField" promptText="Enter your full name"
+                   style="-fx-font-size: 13px; -fx-padding: 10;
+                          -fx-background-radius: 6; -fx-border-color: #ddd;
+                          -fx-border-radius: 6;">
+            <VBox.margin><Insets bottom="14"/></VBox.margin>
+        </TextField>
+
+        <Label text="Email Address"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;
+                      -fx-text-fill: #333; -fx-padding: 0 0 4 0;"
+               maxWidth="Infinity"/>
+        <TextField fx:id="emailField" promptText="Enter your email"
+                   style="-fx-font-size: 13px; -fx-padding: 10;
+                          -fx-background-radius: 6; -fx-border-color: #ddd;
+                          -fx-border-radius: 6;">
+            <VBox.margin><Insets bottom="14"/></VBox.margin>
+        </TextField>
+
+        <Label text="Password"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;
+                      -fx-text-fill: #333; -fx-padding: 0 0 4 0;"
+               maxWidth="Infinity"/>
+        <PasswordField fx:id="passwordField" promptText="Create a password"
+                       style="-fx-font-size: 13px; -fx-padding: 10;
+                              -fx-background-radius: 6; -fx-border-color: #ddd;
+                              -fx-border-radius: 6;">
+            <VBox.margin><Insets bottom="14"/></VBox.margin>
+        </PasswordField>
+
+        <Label text="Confirm Password"
+               style="-fx-font-size: 13px; -fx-font-weight: bold;
+                      -fx-text-fill: #333; -fx-padding: 0 0 4 0;"
+               maxWidth="Infinity"/>
+        <PasswordField fx:id="confirmPasswordField" promptText="Repeat your password"
+                       style="-fx-font-size: 13px; -fx-padding: 10;
+                              -fx-background-radius: 6; -fx-border-color: #ddd;
+                              -fx-border-radius: 6;">
+            <VBox.margin><Insets bottom="8"/></VBox.margin>
+        </PasswordField>
+
+        <Label fx:id="errorLabel" text="" wrapText="true"
+               style="-fx-text-fill: #d32f2f; -fx-font-size: 12px;"
+               visible="false">
+            <VBox.margin><Insets bottom="8"/></VBox.margin>
+        </Label>
+
+        <Label fx:id="successLabel" text="" wrapText="true"
+               style="-fx-text-fill: #2e7d32; -fx-font-size: 12px;"
+               visible="false">
+            <VBox.margin><Insets bottom="8"/></VBox.margin>
+        </Label>
+
+        <Button text="Create Account" maxWidth="Infinity"
+                onAction="#handleRegister"
+                style="-fx-background-color: #1a73e8; -fx-text-fill: white;
+                       -fx-font-size: 14px; -fx-font-weight: bold;
+                       -fx-padding: 12; -fx-background-radius: 6;
+                       -fx-cursor: hand;">
+            <VBox.margin><Insets bottom="14"/></VBox.margin>
+        </Button>
+
+        <Button text="Back to Login" maxWidth="Infinity"
+                onAction="#goToLogin"
+                style="-fx-background-color: transparent; -fx-text-fill: #1a73e8;
+                       -fx-font-size: 13px; -fx-border-color: #1a73e8;
+                       -fx-border-radius: 6; -fx-background-radius: 6;
+                       -fx-padding: 10; -fx-cursor: hand;"/>
+    </VBox>
+</StackPane>

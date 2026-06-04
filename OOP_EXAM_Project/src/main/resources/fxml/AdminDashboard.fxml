@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.lims.controller.admin.AdminDashboardController"
+      alignment="CENTER" spacing="20"
+      style="-fx-padding: 40; -fx-background-color: #f0f4f8;">
+    <Label text="Super Admin Dashboard"
+           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1a73e8;"/>
+    <Label text="Member 2 — build your UI here"
+           style="-fx-font-size: 14px; -fx-text-fill: #888;"/>
+</VBox>
