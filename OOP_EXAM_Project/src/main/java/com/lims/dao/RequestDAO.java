@@ -2,17 +2,12 @@ package com.lims.dao;
 
 import com.lims.model.TestRequest;
 import com.lims.util.DBConnection;
-
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.ResultSet;
 
-/**
- * RequestDAO.java
- * Reads the Test Request Queue and updates payment status.
- * Used by Member 2's RequestQueueController.
- */
 public class RequestDAO {
 
     private static final DateTimeFormatter FMT = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
@@ -81,4 +76,64 @@ public class RequestDAO {
         }
         new AuditLogDAO().log(0, "Request #" + requestId + " marked PAID", "test_requests", requestId);
     }
+    
+public static class CustomerResultDTO {
+    private final int id;
+    private final String testName;
+    private final String fileUrl;
+    private final String resultText;
+    private final java.time.LocalDateTime validatedAt;
+    
+    
+    public CustomerResultDTO(int id, String testName, String fileUrl,
+                              String resultText, java.time.LocalDateTime validatedAt) {
+        this.id = id;
+        this.testName = testName;
+        this.fileUrl = fileUrl;
+        this.resultText = resultText;
+        this.validatedAt = validatedAt;
+    }
+
+    public int getId()                              { return id; }
+    public String getTestName()                     { return testName; }
+    public String getFileUrl()                      { return fileUrl; }
+    public String getResultText()                   { return resultText; }
+    public java.time.LocalDateTime getValidatedAt() { return validatedAt; }
+}
+
+public static List<CustomerResultDTO> getValidatedResultsForCustomer(int customerId) {
+    List<CustomerResultDTO> list = new ArrayList<>();
+    String sql =
+        "SELECT res.id, t.name AS test, res.file_path, res.result_text, res.validated_at " +
+        "FROM results res " +
+        "JOIN test_requests r ON r.id = res.request_id " +
+        "JOIN tests t ON t.id = r.test_type_id " +
+        "WHERE r.customer_id = ? AND res.validated = TRUE " +
+        "ORDER BY res.validated_at DESC";
+
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setInt(1, customerId);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Timestamp ts = rs.getTimestamp("validated_at");
+            java.time.LocalDateTime validatedAt = ts != null ? ts.toLocalDateTime() : null;
+
+            list.add(new CustomerResultDTO(
+                rs.getInt("id"),
+                rs.getString("test"),
+                rs.getString("file_path"),
+                rs.getString("result_text"),
+                validatedAt
+            ));
+        }
+
+    } catch (SQLException e) {
+        throw new RuntimeException("Error loading customer results: " + e.getMessage(), e);
+    }
+
+    return list;
+  }
 }

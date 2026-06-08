@@ -31,4 +31,6 @@ public class AppConstants {
     
     public static final String FXML_SUPER_ADMIN_HOME   = "/fxml/SuperAdminHome.fxml";
     public static final String FXML_ATTENDANT_HOME     = "/fxml/LabAttendantHome.fxml";
+    public static final String FXML_TEST_BROWSER    = "/fxml/TestBrowser.fxml";
+    public static final String FXML_RESULT_VAULT    = "/fxml/ResultVault.fxml";
 }

@@ -83,4 +83,71 @@ public class ResultDAO {
             "results", resultId
         );
     }
+    
+    /**
+ * CustomerResultDTO
+ * Holds result data formatted for the customer's Result Vault screen.
+ */
+public static class CustomerResultDTO {
+    private final int id;
+    private final String testName;
+    private final String fileUrl;
+    private final String resultText;
+    private final java.time.LocalDateTime validatedAt;
+
+    public CustomerResultDTO(int id, String testName, String fileUrl,
+                              String resultText, java.time.LocalDateTime validatedAt) {
+        this.id = id;
+        this.testName = testName;
+        this.fileUrl = fileUrl;
+        this.resultText = resultText;
+        this.validatedAt = validatedAt;
+    }
+
+    public int getId()                              { return id; }
+    public String getTestName()                     { return testName; }
+    public String getFileUrl()                      { return fileUrl; }
+    public String getResultText()                   { return resultText; }
+    public java.time.LocalDateTime getValidatedAt() { return validatedAt; }
+}
+
+/**
+ * Returns all validated results for a specific customer.
+ * Only shows results where validated = TRUE.
+ */
+public static java.util.List<CustomerResultDTO> getValidatedResultsForCustomer(int customerId) {
+    java.util.List<CustomerResultDTO> list = new java.util.ArrayList<>();
+    String sql =
+        "SELECT res.id, t.name AS test, res.file_path, res.result_text, res.validated_at " +
+        "FROM results res " +
+        "JOIN test_requests r ON r.id = res.request_id " +
+        "JOIN tests t ON t.id = r.test_type_id " +
+        "WHERE r.customer_id = ? AND res.validated = TRUE " +
+        "ORDER BY res.validated_at DESC";
+
+    try (java.sql.Connection conn = com.lims.util.DBConnection.getConnection();
+         java.sql.PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setInt(1, customerId);
+        java.sql.ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            java.sql.Timestamp ts = rs.getTimestamp("validated_at");
+            java.time.LocalDateTime validatedAt = ts != null ? ts.toLocalDateTime() : null;
+            list.add(new CustomerResultDTO(
+                rs.getInt("id"),
+                rs.getString("test"),
+                rs.getString("file_path"),
+                rs.getString("result_text"),
+                validatedAt
+            ));
+        }
+
+    } catch (java.sql.SQLException e) {
+        throw new RuntimeException("Error loading customer results: " + e.getMessage(), e);
+    }
+
+    return list;
+
+}
 }
