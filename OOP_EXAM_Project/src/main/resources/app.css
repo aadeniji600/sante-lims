@@ -1,0 +1,59 @@
+.root {
+    -fx-font-family: "Segoe UI", "Roboto", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #f4f6f8;
+}
+
+/* ---- Launcher ---- */
+.launcher-root { -fx-background-color: linear-gradient(to bottom right, #0d3b66, #1b6ca8); }
+.launcher-title    { -fx-text-fill: white; -fx-font-size: 26px; -fx-font-weight: bold; }
+.launcher-subtitle { -fx-text-fill: #d6e6f5; -fx-font-size: 14px; }
+.muted             { -fx-text-fill: #cfe0f0; }
+
+/* ---- Top bar ---- */
+.topbar { -fx-background-color: #0d3b66; }
+.topbar-title { -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; }
+.topbar-user  { -fx-text-fill: #d6e6f5; }
+
+/* ---- Panels ---- */
+.panel { -fx-background-color: #f4f6f8; }
+.section-title { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #1f2d3d; }
+
+/* ---- Buttons ---- */
+.primary-btn {
+    -fx-background-color: #1b6ca8; -fx-text-fill: white; -fx-font-weight: bold;
+    -fx-background-radius: 6; -fx-padding: 8 16 8 16; -fx-cursor: hand;
+}
+.primary-btn:hover { -fx-background-color: #155a8c; }
+.primary-btn:disabled { -fx-background-color: #9bb6cc; }
+
+.success-btn {
+    -fx-background-color: #1a7f37; -fx-text-fill: white; -fx-font-weight: bold;
+    -fx-background-radius: 6; -fx-padding: 8 16 8 16; -fx-cursor: hand;
+}
+.success-btn:hover { -fx-background-color: #14672c; }
+.success-btn:disabled { -fx-background-color: #9ec7a9; }
+
+.danger-btn {
+    -fx-background-color: #b3261e; -fx-text-fill: white; -fx-font-weight: bold;
+    -fx-background-radius: 6; -fx-padding: 8 16 8 16; -fx-cursor: hand;
+}
+.danger-btn:hover { -fx-background-color: #8f1d17; }
+
+.ghost-btn {
+    -fx-background-color: transparent; -fx-text-fill: #1b6ca8;
+    -fx-border-color: #1b6ca8; -fx-border-radius: 6; -fx-background-radius: 6;
+    -fx-padding: 7 15 7 15; -fx-cursor: hand;
+}
+.ghost-btn:hover { -fx-background-color: #e3eef7; }
+
+/* ---- Tables ---- */
+.table-view { -fx-background-radius: 6; -fx-border-color: #d7dde3; -fx-border-radius: 6; }
+.table-view .column-header-background { -fx-background-color: #e8eef4; }
+.table-view .column-header .label { -fx-font-weight: bold; -fx-text-fill: #1f2d3d; }
+
+/* ---- Tabs ---- */
+.tab-pane .tab { -fx-background-color: #e1e8ee; }
+.tab-pane .tab:selected { -fx-background-color: #f4f6f8; }
+.tab-pane .tab .tab-label { -fx-font-weight: bold; -fx-text-fill: #1f2d3d; }
+

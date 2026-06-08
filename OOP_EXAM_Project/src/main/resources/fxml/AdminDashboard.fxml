@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.lims.controller.admin.AdminDashboardController"
-      alignment="CENTER" spacing="20"
-      style="-fx-padding: 40; -fx-background-color: #f0f4f8;">
-    <Label text="Super Admin Dashboard"
-           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1a73e8;"/>
-    <Label text="Member 2 — build your UI here"
-           style="-fx-font-size: 14px; -fx-text-fill: #888;"/>
-</VBox>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lims.controller.admin.AdminDashboardController">
+    
+    <stylesheets>
+        <URL value="@/app.css"/>
+    </stylesheets>
+
+    <top>
+        <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="12">
+            <padding><Insets top="10" right="16" bottom="10" left="16"/></padding>
+            <Label text="Super Admin" styleClass="topbar-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userLabel" styleClass="topbar-user"/>
+            <Button text="Logout" onAction="#logout" styleClass="ghost-btn"/>
+        </HBox>
+    </top>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Custom Test Builder">
+                    <content><fx:include source="TestBuilder.fxml"/></content>
+                </Tab>
+                <Tab text="Test Request Queue">
+                    <content><fx:include source="RequestQueue.fxml"/></content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>

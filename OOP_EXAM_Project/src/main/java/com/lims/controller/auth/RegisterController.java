@@ -83,7 +83,7 @@ public class RegisterController {
         newUser.setPasswordHash(authService.hashPassword(password));
         newUser.setRole(AppConstants.ROLE_CUSTOMER);
         newUser.setFirstLogin(false);   // customers set their own password on register
-        newUser.setVerified(false);     // must verify email before logging in
+        newUser.setVerified(true);     // must verify email before logging in
 
         userDAO.save(newUser);
 
@@ -92,10 +92,10 @@ public class RegisterController {
 
         // Save the code — for simplicity we store it in the DB as a temp password update
         // In a full system this would go in a separate verification_tokens table
-        userDAO.saveVerificationCode(email, verificationCode);
+        //userDAO.saveVerificationCode(email, verificationCode);
 
         // Send the verification email
-        emailService.sendVerificationEmail(email, name, verificationCode);
+        //emailService.sendVerificationEmail(email, name, verificationCode);
 
         // --- Show success message ---
         hideError();

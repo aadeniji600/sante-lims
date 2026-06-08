@@ -19,7 +19,6 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class AuthService {
 
-    // AuthService needs these DAOs to do its job
     private final UserDAO userDAO = new UserDAO();
     private final AuditLogDAO auditLogDAO = new AuditLogDAO();
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lims.controller.attendant.ResultUploadController"
+      spacing="14" styleClass="panel">
+    <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+    
+    <stylesheets>
+        <URL value="@/app.css"/>
+    </stylesheets>
+
+    <Label text="Upload a result" styleClass="section-title"/>
+    <GridPane hgap="12" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120"/>
+            <ColumnConstraints minWidth="260" hgrow="ALWAYS"/>
+            <ColumnConstraints minWidth="120"/>
+        </columnConstraints>
+
+        <Label text="Request" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="requestBox" promptText="Select request" maxWidth="Infinity"
+                  GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="File (PDF/image)" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="filePathField" promptText="No file chosen" editable="false"
+                   GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Button text="Choose File..." onAction="#onChooseFile" styleClass="ghost-btn"
+                GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+        <Label text="Text/numeric result" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="resultTextField" promptText="Optional, e.g. 'Negative' or '4.5 x10^9/L'"
+                   GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button text="Upload Result" onAction="#onUpload" styleClass="primary-btn"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Refresh" onAction="#onRefresh" styleClass="ghost-btn"/>
+    </HBox>
+
+    <Label text="Uploaded results (select one, then validate to release)" styleClass="section-title"/>
+    <TableView fx:id="table" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="colReq" text="Req #" prefWidth="60"/>
+            <TableColumn fx:id="colCustomer" text="Customer" prefWidth="160"/>
+            <TableColumn fx:id="colTest" text="Test" prefWidth="170"/>
+            <TableColumn fx:id="colFile" text="File" prefWidth="220"/>
+            <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
+        </columns>
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button fx:id="validateButton" text="Validate &amp; Release to Customer"
+                onAction="#onValidate" styleClass="success-btn" disable="true"/>
+    </HBox>
+</VBox>
+

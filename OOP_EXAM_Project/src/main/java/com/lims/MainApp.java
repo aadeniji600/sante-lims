@@ -22,12 +22,11 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Load the Login screen FXML file
+  
         FXMLLoader loader = new FXMLLoader(
             getClass().getResource(AppConstants.FXML_LOGIN)
         );
 
-        // Create the scene with the size defined in AppConstants
         Scene scene = new Scene(loader.load(), AppConstants.APP_WIDTH, AppConstants.APP_HEIGHT);
 
         primaryStage.setTitle(AppConstants.APP_TITLE);
@@ -36,6 +35,8 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args); // this calls start() above
+        launch(args);
     }
+    
+    
 }

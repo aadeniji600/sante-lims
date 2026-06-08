@@ -26,7 +26,6 @@ public class SceneManager {
 
             Scene scene = new Scene(loader.load(), AppConstants.APP_WIDTH, AppConstants.APP_HEIGHT);
 
-            // Get the current window from the event source and swap the scene
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();

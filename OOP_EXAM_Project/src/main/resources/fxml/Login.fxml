@@ -2,6 +2,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
+<?import java.net.URL?>
 
 <!-- Login.fxml
      This is the first screen the user sees.
@@ -12,6 +13,11 @@
       fx:controller="com.lims.controller.auth.LoginController"
       alignment="CENTER" spacing="16"
       style="-fx-padding: 60; -fx-background-color: #f4f4f4;">
+    
+    <stylesheets>
+        <URL value="@/app.css"/>
+    </stylesheets>
+
 
     <Label text="Santé Diagnostics LIMS"
            style="-fx-font-size: 24px; -fx-font-weight: bold;"/>

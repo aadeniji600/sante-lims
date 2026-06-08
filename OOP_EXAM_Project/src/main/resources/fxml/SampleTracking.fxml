@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.lims.controller.attendant.SampleTrackingController"
+      spacing="14" styleClass="panel">
+    <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+    
+    <stylesheets>
+        <URL value="@/app.css"/>
+    </stylesheets>
+
+    <Label text="Collect a sample (paid requests without a sample)" styleClass="section-title"/>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <ComboBox fx:id="paidRequestBox" promptText="Select a paid request" prefWidth="380"/>
+        <Button text="Register Sample (Collected)" onAction="#onRegister" styleClass="primary-btn"/>
+    </HBox>
+
+    <Label text="Samples in progress (select a row, then set status)" styleClass="section-title"/>
+    <TableView fx:id="table" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" text="Sample" prefWidth="70"/>
+            <TableColumn fx:id="colReq" text="Req #" prefWidth="60"/>
+            <TableColumn fx:id="colCustomer" text="Customer" prefWidth="170"/>
+            <TableColumn fx:id="colTest" text="Test" prefWidth="180"/>
+            <TableColumn fx:id="colStatus" text="Status" prefWidth="120"/>
+            <TableColumn fx:id="colUpdated" text="Updated At" prefWidth="160"/>
+        </columns>
+        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Set status:"/>
+        <ComboBox fx:id="statusBox" prefWidth="180"/>
+        <Button text="Update Status" onAction="#onUpdateStatus" styleClass="primary-btn"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Refresh" onAction="#onRefresh" styleClass="ghost-btn"/>
+    </HBox>
+</VBox>
+

@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.lims.controller.customer.CustomerDashboardController"
-      alignment="CENTER" spacing="20"
-      style="-fx-padding: 40; -fx-background-color: #f0f4f8;">
-    <Label text="Customer Dashboard"
-           style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #1a73e8;"/>
-    <Label text="Member 3 — build your UI here"
-           style="-fx-font-size: 14px; -fx-text-fill: #888;"/>
-</VBox>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.lims.controller.customer.CustomerDashboardController">
+    
+    <stylesheets>
+        <URL value="@/app.css"/>
+    </stylesheets>
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="12"
+              style="-fx-background-color: #0d3b66; -fx-padding: 10 16 10 16;">
+            <Label text="Customer Portal"
+                   style="-fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="userLabel"
+                   style="-fx-text-fill: #d6e6f5;"/>
+            <Button text="Logout" onAction="#logout"
+                    style="-fx-background-color: transparent; -fx-text-fill: white;
+                           -fx-border-color: white; -fx-border-radius: 4;
+                           -fx-padding: 6 12; -fx-cursor: hand;"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox alignment="CENTER" spacing="16" style="-fx-padding: 40;">
+            <Label text="Customer Dashboard"
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #1a73e8;"/>
+            <Label text="Member 3 will build the full customer features here."
+                   style="-fx-font-size: 13px; -fx-text-fill: #888;"/>
+        </VBox>
+    </center>
+</BorderPane>

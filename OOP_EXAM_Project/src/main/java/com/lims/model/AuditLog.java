@@ -14,16 +14,16 @@ import java.time.LocalDateTime;
 public class AuditLog {
 
     private int id;
-    private int userId;       // who performed the action
-    private String action;    // plain English description e.g. "User logged in"
-    private String entityType; // which table was affected e.g. "test_request"
-    private int entityId;     // ID of the specific record affected
+    private int userId;      
+    private String action;   
+    private String entityType; 
+    private int entityId;    
     private LocalDateTime loggedAt;
 
-    // Empty constructor
+    
     public AuditLog() {}
 
-    // Full constructor
+    
     public AuditLog(int id, int userId, String action, String entityType,
                     int entityId, LocalDateTime loggedAt) {
         this.id = id;
@@ -34,7 +34,6 @@ public class AuditLog {
         this.loggedAt = loggedAt;
     }
 
-    // Getters and Setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 
