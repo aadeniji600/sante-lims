@@ -18,21 +18,36 @@ import javafx.stage.Stage;
  */
 public class SceneManager {
 
-    public static void switchTo(javafx.event.ActionEvent event, String fxmlPath) {
+public static void switchTo(javafx.event.ActionEvent event, String fxmlPath) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                SceneManager.class.getResource(fxmlPath)
-            );
+            // 1. Get the current active window (Stage)
+            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
 
-            Scene scene = new Scene(loader.load(), AppConstants.APP_WIDTH, AppConstants.APP_HEIGHT);
+            // 2. Record the exact current dimensions and maximized state
+            boolean isMaximized = stage.isMaximized();
+            double currentWidth = stage.getWidth();
+            double currentHeight = stage.getHeight();
 
-            // Get the current window from the event source and swap the scene
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            // 3. Load the new FXML file
+            javafx.scene.Parent root = javafx.fxml.FXMLLoader.load(SceneManager.class.getResource(fxmlPath));
+            javafx.scene.Scene scene = new javafx.scene.Scene(root);
             stage.setScene(scene);
-            stage.show();
 
+            // 4. Force the window to retain its exact previous state
+            if (isMaximized) {
+                stage.setMaximized(true);
+            } else {
+                // Only set width/height if it's not maximized, otherwise it glitches
+                if (!Double.isNaN(currentWidth) && !Double.isNaN(currentHeight)) {
+                    stage.setWidth(currentWidth);
+                    stage.setHeight(currentHeight);
+                }
+            }
+
+            stage.show();
         } catch (Exception e) {
-            throw new RuntimeException("Could not load screen: " + fxmlPath, e);
+            System.err.println("Error switching to " + fxmlPath + ": " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

@@ -31,48 +31,45 @@ public class LoginController {
 
     // Service that handles the actual login logic
     private final AuthService authService = new AuthService();
+    // === TEMPORARY HASH GENERATOR ===
+
+        // ================================
 
     /**
      * Called when the user clicks "Log In".
      * The method name must match the onAction="#handleLogin" in the FXML.
      */
-    @FXML
-    private void handleLogin(ActionEvent event) {
-
+@FXML
+    private void handleLogin(javafx.event.ActionEvent event) {
         String email    = emailField.getText().trim();
         String password = passwordField.getText();
 
-        // Basic input validation before even hitting the database
+        // === TEMPORARY HASH GENERATOR ===
+        // This is safely INSIDE the method, right after we grab the password
+        if (password.equals("password123")) {
+            System.out.println("NATIVE BCRYPT HASH: " + authService.hashPassword(password));
+        }
+        // ================================
+
         if (email.isEmpty() || password.isEmpty()) {
             showError("Please enter your email and password.");
             return;
         }
 
         try {
-            // Attempt login — throws IllegalArgumentException on failure
             User user = authService.login(email, password);
+            com.lims.util.SessionManager.setCurrentUser(user);
 
-            // Save the logged-in user so other screens can access them
-            SessionManager.setCurrentUser(user);
-
-            // If this is their first login, force a password change
-            if (user.isFirstLogin()) {
-                SceneManager.switchTo(event, AppConstants.FXML_FORCE_PASSWORD);
-                return;
-            }
-
-            // Navigate to the correct dashboard based on role
             switch (user.getRole()) {
-                case AppConstants.ROLE_SUPER_ADMIN ->
-                    SceneManager.switchTo(event, AppConstants.FXML_ADMIN_DASHBOARD);
-                case AppConstants.ROLE_LAB_ATTENDANT ->
-                    SceneManager.switchTo(event, AppConstants.FXML_ATTENDANT_DASHBOARD);
-                case AppConstants.ROLE_CUSTOMER ->
-                    SceneManager.switchTo(event, AppConstants.FXML_CUSTOMER_DASHBOARD);
+                case com.lims.util.AppConstants.ROLE_SUPER_ADMIN ->
+                    com.lims.util.SceneManager.switchTo(event, com.lims.util.AppConstants.FXML_ADMIN_DASHBOARD);
+                case com.lims.util.AppConstants.ROLE_LAB_ATTENDANT ->
+                    com.lims.util.SceneManager.switchTo(event, com.lims.util.AppConstants.FXML_ATTENDANT_DASHBOARD);
+                case com.lims.util.AppConstants.ROLE_CUSTOMER ->
+                    com.lims.util.SceneManager.switchTo(event, "/fxml/CustomerDashboard.fxml");
             }
 
         } catch (IllegalArgumentException e) {
-            // Show the error message (e.g. "Incorrect password")
             showError(e.getMessage());
         }
     }
